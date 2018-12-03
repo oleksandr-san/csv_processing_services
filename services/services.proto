@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+// protoc --go_out=plugins=grpc:. *.proto
+
+package services;
+
+message CsvProcessingRequest {
+    string URL = 1;
+}
+
+message CsvProcessingResult {
+    string Status = 1;
+}
+
+message Record {
+  string ID = 1;
+  string Name = 2;
+  string Email = 3;
+  string MobileNumber = 4;
+}
+
+message Nothing {
+    string dummy = 1;
+}
+
+service CsvProcessingService {
+    rpc ProcessFile(CsvProcessingRequest) returns (CsvProcessingResult) {}
+}
+
+service DatabaseService {
+    rpc AddRecord(Record) returns (Nothing) {}
+}
+
